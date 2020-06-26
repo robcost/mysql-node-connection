@@ -7,6 +7,9 @@ var client = new AWS.SecretsManager({
   region: region
 });
 
+// BUG
+// this has an async issue I haven't fixed yet. the Secrets Manager api call returns after the connection is created, so the app fails.
+
 module.exports = () => {
   client.getSecretValue({ SecretId: secretName }, function (err, data) {
     if (err) {
